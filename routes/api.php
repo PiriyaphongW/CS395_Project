@@ -26,7 +26,7 @@ Route::post('login', [AuthController::class, 'login']);
 
 
 Route::get('productRead',   [ProductController::class, 'productRead']);
- Route::get('productReadID/{id}',   [ProductController::class, 'productReadID']);
+Route::get('productReadID/{id}',   [ProductController::class, 'productReadID']);
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('productCreate', [ProductController::class, 'productCreate']);

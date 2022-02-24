@@ -28,10 +28,11 @@ class AuthController extends Controller
             'gender' => $validate['gender'],
         ]);
 
-        $token = $user->createToken('myDevice')->plainTextToken;
+        //$token = $user->createToken($request->userAgent())->plainTextToken;
         $response = [
             'user' => $user,
-            'token' => $token,
+            'token' => "Register Success",
+            
         ];
         return response($response);
 
@@ -55,18 +56,19 @@ class AuthController extends Controller
 
             $user->tokens()->delete(); #delete Token After login
 
-            $token = $user->createToken('myDevice')->plainTextToken;
+            $token = $user->createToken($request->userAgent())->plainTextToken;
             $response = [
                 'user' => $user,
                 'token' => $token,
+                'message'=> 'Login Success'
             ];
             return response($response);
         }
     }
      
-    public function logout(){
+    public function logout(Request $request){
 
-        auth()->user()->tokens()->delete();
+        $request->user()->currentAccessToken()->delete();
 
         $response = [
             'message' => 'Logout Success' 
