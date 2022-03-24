@@ -57,6 +57,10 @@ class ProductController extends Controller
 
     }
 
+    public function productReadGuest(){
+        return product::limit(9)->get();
+    }
+
 
 
     
